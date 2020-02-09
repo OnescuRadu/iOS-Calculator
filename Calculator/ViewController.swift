@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     var firstNumber = 0.0
     var resultNumber = 0.0
     var currentOperation = ""
+    var isPerformingOperation = false
     
     
     override func viewDidLoad() {
@@ -41,6 +42,9 @@ class ViewController: UIViewController {
     
     @IBAction func handleNumberPress(_ sender: UIButton) {
         
+        if isPerformingOperation{
+            resultLabel.text = "0"
+        }
         let number = sender.titleLabel?.text
         
         if resultLabel.text == "0" {
@@ -90,6 +94,7 @@ class ViewController: UIViewController {
         
         if pressedOperator == "=" {
             if currentOperation != "" {
+                isPerformingOperation = false
                 var secondNumber = 0.0
                 if resultLabel.text != ""
                 {
@@ -125,8 +130,9 @@ class ViewController: UIViewController {
         else
         {
             firstNumber = Double(resultLabel.text!)!
-            resultLabel.text = ""
+            resultLabel.text = pressedOperator
             currentOperation = pressedOperator!
+            isPerformingOperation = true
         }
         
     }
