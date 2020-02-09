@@ -18,7 +18,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnh-sL-kkR">
                                 <rect key="frame" x="0.0" y="44" width="414" height="256"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-up-Zxe">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-up-Zxe">
                                         <rect key="frame" x="20" y="128" width="374" height="128"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="90"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,7 +49,7 @@
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="AC"/>
                                                         <connections>
-                                                            <action selector="handleOperatorPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="piS-FX-zgK"/>
+                                                            <action selector="clearResult:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VPJ-52-pGS"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUO-yf-jZ3">
@@ -59,7 +59,7 @@
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="+/-"/>
                                                         <connections>
-                                                            <action selector="handleOperatorPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a1j-hU-Hhn"/>
+                                                            <action selector="handlePositiveNegative:" destination="BYZ-38-t0r" eventType="touchUpInside" id="shA-Yj-53m"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jH1-xG-R74">
@@ -257,7 +257,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="handleNumberPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HXp-O4-MNK"/>
+                                                            <action selector="handleZeroPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lnO-RE-oS5"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rY8-3T-NM2">
@@ -269,7 +269,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="handleOperatorPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MkC-Zq-Ebe"/>
+                                                            <action selector="handleDecimal:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c8I-UW-5wD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ZF-Yh-i8K">

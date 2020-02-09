@@ -8,106 +8,128 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+extension Double {
+    func removeZerosFromEnd() -> String {
+        let formatter = NumberFormatter()
+        let number = NSNumber(value: self)
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 9 //maximum 9 decimals
+        return String(formatter.string(from: number) ?? "")
+    }
+}
 
+class ViewController: UIViewController {
+    
+    
     @IBOutlet weak var resultLabel: UILabel!
     
-    var numberOnScreen: Double = 0
-    var previousNumber: Double = 0
-    var operation = ""
-    var isPerformingOperation = false
+    var firstNumber = 0.0
+    var resultNumber = 0.0
+    var currentOperation = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultLabel.text=""
+        resultLabel.text = "0"
     }
     
     //Make the status bar text white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
+    
     
     @IBAction func handleNumberPress(_ sender: UIButton) {
         
-        let numberPressed = sender.titleLabel?.text
+        let number = sender.titleLabel?.text
         
-        if(isPerformingOperation)
-        {
-            isPerformingOperation = false
-            resultLabel.text = numberPressed
-            numberOnScreen = Double(resultLabel.text!)!
-        } else {
-            resultLabel.text = resultLabel.text! + numberPressed!
-            numberOnScreen = Double(resultLabel.text!)!
+        if resultLabel.text == "0" {
+            resultLabel.text = number
+        }
+        else if let text = resultLabel.text {
+            resultLabel.text = text + String(number!)
         }
         
     }
     
-    @IBAction func handleOperatorPress(_ sender: UIButton) {
-        let operatorPressed = sender.titleLabel?.text
-        isPerformingOperation = true;
-        operation = operatorPressed!
-        
-        switch operatorPressed {
-        case "AC":
-            resultLabel.text = ""
-            numberOnScreen = 0
-            previousNumber = 0
-            operation = ""
-            return
-        case "+/-":
-            isPerformingOperation = true
-            previousNumber = Double(resultLabel.text!)!
-            resultLabel.text = "+/-"
-            operation = "+/-"
-        case "%":
-            isPerformingOperation = true
-             previousNumber = Double(resultLabel.text!)!
-            resultLabel.text = "%"
-            operation = "%"
-        case "÷":
-            isPerformingOperation = true
-             previousNumber = Double(resultLabel.text!)!
-            resultLabel.text = "÷"
-            operation = "÷"
-        case "x":
-            isPerformingOperation = true
-             previousNumber = Double(resultLabel.text!)!
-            resultLabel.text = "x"
-            operation = "x"
-        case "-":
-            isPerformingOperation = true
-             previousNumber = Double(resultLabel.text!)!
-            resultLabel.text = "-"
-            operation = "-"
-        case "+":
-            isPerformingOperation = true
-            previousNumber = Double(resultLabel.text!)!
-            resultLabel.text = "+"
-            operation = "+"
-        case "=":
-            switch operation {
-            case "+":
-                resultLabel.text = String(previousNumber + numberOnScreen)
-            case "-":
-                resultLabel.text = String(previousNumber - numberOnScreen)
-            case "x":
-            resultLabel.text = String(previousNumber * numberOnScreen)
-            case "÷":
-                resultLabel.text = String(previousNumber / numberOnScreen)
-            case "%":
-                resultLabel.text = String(previousNumber.truncatingRemainder(dividingBy: numberOnScreen) )
-            default:
-                return
+    
+    @IBAction func clearResult(_ sender: UIButton) {
+        resultLabel.text = "0"
+        currentOperation = ""
+        firstNumber = 0.0
+    }
+    
+    @IBAction func handleZeroPress(_ sender: UIButton) {
+        if resultLabel.text != "0" {
+            if let text = resultLabel.text {
+                resultLabel.text = "\(text)\(0)"
             }
-            
-        case ".":
-            print(".")
-        default:
-            print("default")
         }
     }
-
+    
+    @IBAction func handlePositiveNegative(_ sender: UIButton) {
+        if(resultLabel.text != "0")
+        {
+            resultLabel.text = (-Double(resultLabel.text!)!).removeZerosFromEnd()
+        }
+    }
+    
+    @IBAction func handleDecimal(_ sender: UIButton) {
+        if resultLabel.text?.contains(".") == false
+        {
+            resultLabel.text?.append(".")
+        }
+    }
+    
+    @IBAction func handleOperatorPress(_ sender: UIButton) {
+        let pressedOperator = sender.titleLabel?.text
+        
+        if firstNumber == 0.0, resultLabel.text != "" {
+            firstNumber = Double(resultLabel.text!)!
+        }
+        
+        if pressedOperator == "=" {
+            if currentOperation != "" {
+                var secondNumber = 0.0
+                if resultLabel.text != ""
+                {
+                    secondNumber = Double(resultLabel.text!)!
+                }
+                
+                switch currentOperation {
+                case "+":
+                    resultLabel.text = (firstNumber + secondNumber).removeZerosFromEnd()
+                    break
+                    
+                case "-":
+                    resultLabel.text = (firstNumber - secondNumber).removeZerosFromEnd()
+                    break
+                    
+                case "x":
+                    resultLabel.text = (firstNumber * secondNumber).removeZerosFromEnd()
+                    break
+                    
+                case "÷":
+                    resultLabel.text = (firstNumber / secondNumber).removeZerosFromEnd()
+                    break
+                    
+                case "%":
+                    resultLabel.text = (firstNumber.truncatingRemainder(dividingBy: secondNumber)).removeZerosFromEnd()
+                    break
+                    
+                default:
+                    print(currentOperation)
+                }
+            }
+        }
+        else
+        {
+            firstNumber = Double(resultLabel.text!)!
+            resultLabel.text = ""
+            currentOperation = pressedOperator!
+        }
+        
+    }
 }
+
 
