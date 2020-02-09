@@ -317,6 +317,7 @@
                     </view>
                     <connections>
                         <outlet property="resultLabel" destination="dk5-up-Zxe" id="NV6-rC-EPM"/>
+                        <outlet property="roundBtn" destination="B7E-k5-0YP" id="R3J-WD-tcK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -9,6 +9,8 @@
 import UIKit
 
 extension Double {
+    //Formatter to remove trailing zeros from Double
+    //Returns String
     func removeZerosFromEnd() -> String {
         let formatter = NumberFormatter()
         let number = NSNumber(value: self)
@@ -20,8 +22,9 @@ extension Double {
 
 class ViewController: UIViewController {
     
-    
+    //Reference to the result label
     @IBOutlet weak var resultLabel: UILabel!
+
     
     var firstNumber = 0.0
     var resultNumber = 0.0
@@ -32,6 +35,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resultLabel.text = "0"
+        //Adjust font size to fit in the result label
+        resultLabel.adjustsFontSizeToFitWidth = true
     }
     
     //Make the status bar text white
@@ -42,12 +47,15 @@ class ViewController: UIViewController {
     
     @IBAction func handleNumberPress(_ sender: UIButton) {
         
+        //If it is performing operation remove the operator symbol from the result label
         if isPerformingOperation{
             resultLabel.text = "0"
             isPerformingOperation = false
         }
+        
         let number = sender.titleLabel?.text
         
+        //If result label is 0 change it to to pressed number else concatenate the pressed number to the previos number
         if resultLabel.text == "0" {
             resultLabel.text = number
         }
@@ -64,6 +72,7 @@ class ViewController: UIViewController {
         firstNumber = 0.0
     }
     
+    //Avoid having "00" in the result label
     @IBAction func handleZeroPress(_ sender: UIButton) {
         if resultLabel.text != "0" {
             if let text = resultLabel.text {
@@ -72,6 +81,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //Making the number negative or positive
     @IBAction func handlePositiveNegative(_ sender: UIButton) {
         if(resultLabel.text != "0")
         {
@@ -79,6 +89,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //Add decimal if there is no other decimal already
     @IBAction func handleDecimal(_ sender: UIButton) {
         if resultLabel.text?.contains(".") == false
         {
@@ -86,7 +97,10 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    //Handle the press of operator symbols
     @IBAction func handleOperatorPress(_ sender: UIButton) {
+        
         let pressedOperator = sender.titleLabel?.text
         
         if firstNumber == 0.0, resultLabel.text != "" {
@@ -95,7 +109,6 @@ class ViewController: UIViewController {
         
         if pressedOperator == "=" {
             if currentOperation != "" {
-                isPerformingOperation = false
                 var secondNumber = 0.0
                 if resultLabel.text != ""
                 {
