@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         
         if isPerformingOperation{
             resultLabel.text = "0"
+            isPerformingOperation = false
         }
         let number = sender.titleLabel?.text
         
